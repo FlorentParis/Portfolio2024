@@ -6,14 +6,20 @@ import Footer from '../Footer';
 
 type PageContainerProps = {
   children: React.ReactElement | React.ReactElement[];
+  withoutFooter?: boolean;
+  fullHeight?: boolean;
 };
 
-const PageContainer = ({ children }: PageContainerProps) => {
+const PageContainer = ({
+  children,
+  withoutFooter,
+  fullHeight,
+}: PageContainerProps) => {
   return (
-    <div>
+    <div className={fullHeight ? 'h-screen' : ''}>
       <Navbar />
       {children}
-      <Footer />
+      {!withoutFooter && <Footer />}
     </div>
   );
 };

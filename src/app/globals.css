@@ -8,3 +8,7 @@ body {
   background-color: black;
   color: #fff;
 }
+
+#__next {
+  min-height: 100vh;
+}

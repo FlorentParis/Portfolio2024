@@ -69,7 +69,7 @@ const Homepage = () => {
               </div>
               <h1>DEVELOPER</h1>
             </div>
-            <p className="font-barlow-condensed pt-2 w-60 leading-[120%]">
+            <p className="font-barlow-condensed pt-2 w-1/3 leading-[120%] pl-11">
               Create a memorable experience through my code and creativity.
             </p>
             <div className="absolute -top-11 -right-40 font-barlow-condensed">
@@ -83,7 +83,7 @@ const Homepage = () => {
                 <MdArrowOutward className="text-primary h-5 w-5" />
               </Link>
               <Link
-                href="/social-media"
+                href="#footer"
                 className="group flex items-center w-36 justify-between cursor-pointer font-bold"
               >
                 <LineThroughText>

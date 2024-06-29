@@ -17,8 +17,8 @@ const Footer = () => {
   if (!time) return null;
 
   return (
-    <footer className="flex flex-col text-[#E3E3E3] p-5">
-      <div className="flex items-center justify-center gap-7 pb-40">
+    <footer id="footer" className="flex flex-col text-[#E3E3E3] p-5">
+      <div className="flex items-center justify-center gap-7 pb-40 pt-10">
         <h4 className="font-playfair-display text-[28px] italic">
           Florent PARIS
         </h4>
