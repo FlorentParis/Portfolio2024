@@ -1,18 +1,78 @@
 import '@/app/globals.css';
+import Icon from '@/components/Icon';
 
 /* components */
 import PageContainer from '@/components/PageContainer';
+import StackElement, { StackElementProps } from '@/components/StackItem';
 
 const Stack = () => {
-  const stackItems = [
-    { name: 'React', tags: ['librairy', 'front'] },
-    { name: 'React Native', tags: ['mobile', 'front'] },
-    { name: 'Typescript', tags: ['typing'] },
-    { name: 'Tailwind', tags: ['stylization'] },
-    { name: 'SCSS', tags: ['stylization', 'css'] },
-    { name: 'Express.js', tags: ['back', 'infrastructure'] },
-    { name: 'Nest.js', tags: ['back', 'framework'] },
-    { name: 'npm', tags: ['package manager'] },
+  const stackItems: StackElementProps[] = [
+    {
+      name: 'React',
+      tags: ['librairy', 'front'],
+      icon: 'react',
+      link: 'https://react.dev/',
+    },
+    {
+      name: 'Typescript',
+      tags: ['typing'],
+      icon: 'typescript',
+      link: 'https://www.typescriptlang.org/',
+    },
+    {
+      name: 'Next',
+      tags: ['framework', 'front'],
+      icon: 'next',
+      link: 'https://nextjs.org/',
+    },
+    {
+      name: 'Tailwind CSS',
+      tags: ['stylization'],
+      icon: 'tailwind',
+      link: 'https://tailwindcss.com/',
+    },
+    {
+      name: 'Framer Motion',
+      tags: ['front', 'animation'],
+      icon: 'framer',
+      link: 'https://www.framer.com/motion/',
+    },
+    {
+      name: 'Sass',
+      tags: ['stylization', 'css'],
+      icon: 'sass',
+      link: 'https://sass-lang.com/',
+    },
+    {
+      name: 'React Native',
+      tags: ['mobile', 'front'],
+      icon: 'react',
+      link: 'https://reactnative.dev/',
+    },
+    {
+      name: 'Nest.js',
+      tags: ['back', 'framework'],
+      icon: 'nest',
+      link: 'https://nestjs.com/',
+    },
+    {
+      name: 'Express.js',
+      tags: ['back', 'infrastructure'],
+      icon: 'express',
+      link: 'https://expressjs.com/',
+    },
+    {
+      name: 'npm',
+      tags: ['package manager'],
+      icon: 'npm',
+      link: 'https://www.npmjs.com/',
+    },
+    {
+      name: 'Yarn',
+      tags: ['package manager'],
+      icon: 'yarn',
+      link: 'https://yarnpkg.com/',
+    },
   ];
 
   const numColumns = 3;
@@ -33,40 +93,15 @@ const Stack = () => {
               const colspanClass = `col-span-${Math.min(numEmptySlots + 1, 4)}`;
               return (
                 <div key={index} className={colspanClass}>
-                  <StackElement name={item.name} tags={item.tags} />
+                  <StackElement {...item} />
                 </div>
               );
             }
-            return (
-              <StackElement key={index} name={item.name} tags={item.tags} />
-            );
+            return <StackElement key={index} {...item} />;
           })}
         </div>
       </div>
     </PageContainer>
-  );
-};
-
-type StackElementProps = {
-  name: string;
-  tags?: string[];
-};
-
-const StackElement = ({ name, tags }: StackElementProps) => {
-  return (
-    <div className="group h-80 bg-black hover:bg-[#0c0c0c] cursor-pointer p-5 flex items-end">
-      <div className="flex justify-between w-full">
-        <h2 className="text-white font-barlow-condensed uppercase">{name}</h2>
-        <div className="flex items-center gap-2">
-          {tags &&
-            tags.map((tag) => (
-              <span className="border border-px text-[#ffffff30] border-[#ffffff11] bg-[#ffffff05] group-hover:border-[#ffffff09] group-hover:bg-[#ffffff06] rounded-full text-md font-light px-2">
-                {tag}
-              </span>
-            ))}
-        </div>
-      </div>
-    </div>
   );
 };
 
