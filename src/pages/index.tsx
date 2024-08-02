@@ -1,4 +1,5 @@
 import '@/app/globals.css';
+import { useRef } from 'react';
 import Link from 'next/link';
 
 /* icons */
@@ -12,8 +13,15 @@ import { FaRegFolderOpen } from 'react-icons/fa';
 /* components */
 import PageContainer from '@/components/PageContainer';
 import LineThroughText from '@/components/LineThrounghText';
+import scrollToElement from '@/hooks/scrollToElement';
+import useRandomVideoOpener from '@/hooks/useRandomOpenLinks';
 
 const Homepage = () => {
+  const menuRef = useRef(null);
+  const footerRef = useRef(null);
+
+  const openRandomVideo = useRandomVideoOpener();
+
   const selectionsList = [
     {
       icon: <SlGrid className="h-5 w-5" />,
@@ -49,12 +57,21 @@ const Homepage = () => {
       icon: <FaRegFolderOpen className="h-5 w-5" />,
       name: 'RESSOURCES',
       description: 'FEW FREE RESSOURCES FOR DEV',
-      url: '/ressources',
+      url: 'https://github.com/FlorentParis/my-free-dev-ressources',
+      target: '_blank',
     },
   ];
 
+  const handleScrollToMenu = () => {
+    scrollToElement(menuRef);
+  };
+
+  const handleScrollToFooter = () => {
+    scrollToElement(footerRef);
+  };
+
   return (
-    <PageContainer>
+    <PageContainer footerRef={footerRef}>
       <>
         <div className="h-screen flex flex-col items-center justify-center relative">
           <h4 className="absolute -top-[80px] left-[90px] w-[230px] text-white text-[200px] font-playfair-display break-words leading-[60%]">
@@ -73,31 +90,34 @@ const Homepage = () => {
               Create a memorable experience through my code and creativity.
             </p>
             <div className="absolute -top-11 -right-40 font-barlow-condensed">
-              <Link
-                href="/things"
+              <div
+                onClick={() => openRandomVideo()}
                 className="group flex items-center w-36 justify-between cursor-pointer font-bold"
               >
                 <LineThroughText>
                   <span>THINGS</span>
                 </LineThroughText>
                 <MdArrowOutward className="text-primary h-5 w-5" />
-              </Link>
-              <Link
-                href="#footer"
+              </div>
+              <div
+                onClick={handleScrollToFooter}
                 className="group flex items-center w-36 justify-between cursor-pointer font-bold"
               >
                 <LineThroughText>
                   <span>SOCIAL MEDIA</span>
                 </LineThroughText>
                 <MdArrowOutward className="text-primary h-5 w-5" />
-              </Link>
+              </div>
             </div>
           </div>
-          <p className="absolute flex gap-5 bottom-7 font-playfair-display text-xl w-[163px] text-[#e3e3e3] overflow-hidden after:content-[''] after:h-14 after:w-px after:block after:bg-white after:absolute after:left-0 after:animate-scroll before:content-[''] before:h-14 before:block before:w-px before:bg-[#e3e3e3]">
+          <p
+            onClick={handleScrollToMenu}
+            className="cursor-pointer absolute flex gap-5 bottom-7 font-playfair-display text-xl w-[163px] text-[#e3e3e3] overflow-hidden after:content-[''] after:h-14 after:w-px after:block after:bg-white after:absolute after:left-0 after:animate-scroll before:content-[''] before:h-14 before:block before:w-px before:bg-[#e3e3e3]"
+          >
             Discover myself point by point.
           </p>
         </div>
-        <div className="flex py-24">
+        <div ref={menuRef} className="flex py-24">
           <ul className="flex flex-col w-full">
             {selectionsList.map((selection) => {
               return <SelectionList {...selection} />;
@@ -109,11 +129,12 @@ const Homepage = () => {
   );
 };
 
-const SelectionList = ({ icon, name, url, description }: any) => {
+const SelectionList = ({ icon, name, url, description, target }: any) => {
   return (
     <li className="group border-t border-solid border-[#ffffff0d] hover:bg-[#ffffff0d] transition">
       <Link
         href={url}
+        target={target}
         className="group flex justify-between items-center py-5 px-7"
       >
         <div className="flex items-center gap-1">

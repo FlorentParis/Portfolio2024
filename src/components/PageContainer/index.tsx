@@ -8,18 +8,24 @@ type PageContainerProps = {
   children: React.ReactElement | React.ReactElement[];
   withoutFooter?: boolean;
   fullHeight?: boolean;
+  footerRef?: React.LegacyRef<HTMLDivElement>;
 };
 
 const PageContainer = ({
   children,
   withoutFooter,
   fullHeight,
+  footerRef,
 }: PageContainerProps) => {
   return (
     <div className={fullHeight ? 'h-screen' : ''}>
       <Navbar />
       {children}
-      {!withoutFooter && <Footer />}
+      {!withoutFooter && (
+        <div ref={footerRef}>
+          <Footer />
+        </div>
+      )}
     </div>
   );
 };
